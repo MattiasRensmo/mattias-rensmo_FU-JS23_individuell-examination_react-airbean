@@ -1,0 +1,16 @@
+@use './../sass/styles/' as *;
+
+.pageWrapper {
+  background-color: $pink;
+  // min-height: 100lvh;
+}
+.content {
+  padding: 1rem;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: 32px auto max-content;
+  gap: 1rem;
+  grid-template-areas: 'add title price';
+}

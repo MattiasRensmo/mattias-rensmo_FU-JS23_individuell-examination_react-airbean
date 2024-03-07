@@ -1,0 +1,24 @@
+@use './../sass/styles/' as *;
+
+.container {
+  position: relative;
+}
+
+.numItems {
+  position: absolute;
+  font-weight: bold;
+  background: $orange;
+  border-radius: 50%;
+  // aspect-ratio: 1/1;
+  width: 1.6em;
+  text-align: center;
+
+  right: -0.5rem;
+  top: -0.5rem;
+  padding: 0.2em;
+}
+
+.menuIcon {
+  height: 3rem;
+  cursor: pointer;
+}

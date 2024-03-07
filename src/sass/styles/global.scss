@@ -1,0 +1,21 @@
+a {
+  color: unset;
+  text-decoration: unset;
+}
+
+.pageWrapper {
+  min-height: 100lvh;
+  display: grid;
+  grid-template-rows: 113px 1fr 73px;
+  grid-template-columns: 1fr;
+
+  > * {
+    border: 1px solid green;
+  }
+}
+
+.content {
+  overflow-y: hidden;
+  max-width: 600px;
+  margin: 0 auto;
+}

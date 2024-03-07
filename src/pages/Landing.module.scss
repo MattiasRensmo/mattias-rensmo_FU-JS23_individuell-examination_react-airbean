@@ -1,0 +1,17 @@
+@use './../sass/styles/' as *;
+
+.wrapper {
+  background-color: $green;
+  min-height: 100lvh;
+  background-image: url('./../assets/img/background/left.svg'),
+    url('./../assets/img/background/right.svg');
+  background-position: left top, right top;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}

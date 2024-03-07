@@ -1,0 +1,44 @@
+@use './../sass/styles/' as *;
+
+.menuRow {
+  grid-column: span 3;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+.add {
+  grid-area: add;
+  grid-row: span 2;
+  height: 32px;
+  justify-self: center;
+  align-self: center;
+
+  img {
+    width: 32px;
+  }
+}
+
+.title {
+  grid-area: title;
+  max-width: 208px;
+  overflow: hidden;
+  text-wrap: nowrap;
+  white-space: nowrap;
+  grid-row: 1;
+}
+
+.title::after {
+  letter-spacing: 0.2em;
+  content: ' ........................................';
+}
+
+.desc {
+  grid-area: title;
+  grid-row: 2;
+}
+
+.price {
+  grid-area: price;
+  grid-row: 1;
+  align-self: start;
+}

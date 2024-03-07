@@ -59,6 +59,7 @@ Main: Läsa text
 ### Cart
 
 URL: /cart _ELLER SKA DE VARA EN MODAL SOM HÖR IHOP MED CART-KNAPPEN_
+https://v5.reactrouter.com/web/example/modal-gallery
 
 #### Funktion
 
@@ -103,7 +104,7 @@ Ej inloggad
 -Rubrik
 -Text
 -Namn-ruta
--Epost-ruta
+-E-post-ruta
 -Checkbox
 -Knapp: Brew me a cup (som är skapa konto/logga in)
 
@@ -135,9 +136,9 @@ Visar länkar
 
 Du ska bygga en webbapp där du kan beställa kaffe och få den levererad via drönare (drönare ingår ej i uppgiften).
 
-Figmaskiss: https://www.figma.com/file/UeUGVefSdgio0sRxPFccJI/AirBean-v.1.0?node-id=0%3A1
+Figma-skiss: https://www.figma.com/file/UeUGVefSdgio0sRxPFccJI/AirBean-v.1.0?node-id=0%3A1
 
-APIDOCS: https://airbean-api-xjlcn.ondigitalocean.app/api/docs/ API: https://airbean-api-xjlcn.ondigitalocean.app/
+API DOCS: https://airbean-api-xjlcn.ondigitalocean.app/api/docs/ API: https://airbean-api-xjlcn.ondigitalocean.app/
 
 ## Instruktioner
 
@@ -146,7 +147,7 @@ APIDOCS: https://airbean-api-xjlcn.ondigitalocean.app/api/docs/ API: https://air
 #### För att få Godkänt ska ni:
 
     Gjort enligt Figma skissen
-    Är en single psge application (SPA) med react-router-dom
+    Är en single page application (SPA) med react-router-dom
     Använder sig av Zustand som global state
     Gå att lägga till produkter i en varukorg
     I varukorgen ändra antal/ta bort produkter

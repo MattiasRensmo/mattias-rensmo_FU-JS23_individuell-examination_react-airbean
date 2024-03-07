@@ -1,0 +1,11 @@
+@use './../sass/styles/' as *;
+
+.pageWrapper {
+  background-color: $pink;
+  // min-height: 100lvh;
+}
+
+.content {
+  position: relative;
+  padding: 1rem;
+}
