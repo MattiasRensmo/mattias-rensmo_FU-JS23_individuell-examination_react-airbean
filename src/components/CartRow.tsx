@@ -2,17 +2,18 @@ import { useState } from 'react'
 import plus from '../assets/img/icons/plus.svg'
 import useDebounce from '../hooks/useDebounce'
 import { useCartStateStore } from '../store/useCartStateStore'
-import style from './MenuRow.module.scss'
+import style from './CartRow.module.scss'
 
 interface Props {
   id: string
   title: string
   desc: string
   price: number
+  amount: number
 }
 
-const MenuRow = ({ id, title, desc, price }: Props) => {
-  const { cart, addToCart } = useCartStateStore()
+const CartRow = ({ id, title, desc, price, amount }: Props) => {
+  const { cart, addToCart, increment, decrement } = useCartStateStore()
 
   const handleClick = useDebounce(() => {
     // Your debounced function logic here
@@ -21,14 +22,15 @@ const MenuRow = ({ id, title, desc, price }: Props) => {
 
   return (
     <div className={style.menuRow}>
-      <div className={style.add}>
-        <img src={plus} alt="addToCart" onClick={handleClick} />
-      </div>
       <h3 className={style.title}>{title}</h3>
-      <p className={style.desc}>{desc}</p>
-      <p className={style.price}>{price} kr</p>
+      <p className={style.desc}>{price * amount} kr</p>
+      <div className={style.price}>
+        <p onClick={() => increment(id)}>&and;</p>
+        <p>{amount}</p>
+        <p onClick={() => decrement(id)}>&or;</p>{' '}
+      </div>
     </div>
   )
 }
 
-export default MenuRow
+export default CartRow

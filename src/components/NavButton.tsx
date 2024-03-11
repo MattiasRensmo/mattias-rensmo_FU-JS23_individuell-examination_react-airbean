@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavStateStore } from '../store/useNavStateStore'
+import { useModalStateStore } from '../store/useModalStateStore'
 import closeIcon from './../assets/img/icons/close.svg'
 import menuIcon from './../assets/img/icons/navicon.svg'
 import Nav from './Nav'
@@ -9,19 +9,16 @@ type Props = {}
 
 const NavButton = (props: Props) => {
   // const [visible, setVisible] = useState(false)
-  const { visible, toggleVisible } = useNavStateStore()
+  const { modalVisible, toggleModalVisible: toggleVisible } =
+    useModalStateStore()
   return (
     <>
-      {visible ? (
-        <Nav />
-      ) : (
-        <img
-          src={menuIcon}
-          alt="Menu"
-          className={style.menuIcon}
-          onClick={toggleVisible}
-        />
-      )}
+      <img
+        src={menuIcon}
+        alt="Menu"
+        className={style.menuIcon}
+        onClick={toggleVisible}
+      />
     </>
   )
 }

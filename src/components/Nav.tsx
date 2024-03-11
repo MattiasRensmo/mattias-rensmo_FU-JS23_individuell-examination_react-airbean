@@ -1,37 +1,35 @@
 import { Link } from 'react-router-dom'
-import { useNavStateStore } from '../store/useNavStateStore'
+import { useModalStateStore } from '../store/useModalStateStore'
 import close from './../assets/img/icons/close.svg'
 import style from './Nav.module.scss'
 
-const Nav = () => {
-  const { toggleVisible } = useNavStateStore()
+interface Props {
+  toggle: () => void
+}
+
+const Nav = ({ toggle }: Props) => {
+  // const { toggleModalVisible, modalVisible } = useModalStateStore()
+
   return (
     <div className={style.pageWrapper}>
       <header className={style.header}>
-        <img src={close} onClick={toggleVisible} />
+        <img src={close} onClick={toggle} />
       </header>
-      <nav className={style.content}>
+
+      <menu className={style.content}>
         <li className={style.navItem}>
-          <Link to="/menu" onClick={toggleVisible}>
-            Meny
-          </Link>
+          <Link to="/menu">Meny</Link>
         </li>
         <li className={style.navItem}>
-          <Link to="/about" onClick={toggleVisible}>
-            Vårt kaffe
-          </Link>
+          <Link to="/about">Vårt kaffe</Link>
         </li>
         <li className={style.navItem}>
-          <Link to="/profile" onClick={toggleVisible}>
-            Min profil
-          </Link>
+          <Link to="/profile">Min profil</Link>
         </li>
         <li className={style.navItem}>
-          <Link to="/status" onClick={toggleVisible}>
-            Orderstatus
-          </Link>
+          <Link to="/status">Orderstatus</Link>
         </li>
-      </nav>
+      </menu>
     </div>
   )
 }

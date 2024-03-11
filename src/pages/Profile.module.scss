@@ -1,6 +1,243 @@
 @use './../sass/styles/' as *;
 
-.wrapper {
-  background-color: $pink;
-  min-height: 100lvh;
+.pageWrapper {
+  background-color: $brown;
+
+  // min-height: 100lvh;
 }
+
+.contentLoggedOut {
+  margin-top: -2rem;
+  max-width: 341px;
+  min-height: 565px;
+  background: $pink;
+  box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.6);
+  border-radius: 3px;
+}
+
+.contentLoggedIn {
+  color: white;
+}
+
+// /* CTA */
+
+// position: absolute;
+// width: 248px;
+// height: 55px;
+// left: 64px;
+// top: 552px;
+
+// /* Rectangle 22 */
+
+// position: absolute;
+// width: 248px;
+// height: 55px;
+// left: 64px;
+// top: 552px;
+
+// /* Airbean - brown */
+// background: #2F2926;
+// border-radius: 50px;
+
+// /* Brew me a cup! */
+
+// position: absolute;
+// left: 24.27%;
+// right: 24%;
+// top: 83.96%;
+// bottom: 10.94%;
+
+// font-family: 'PT Serif';
+// font-style: normal;
+// font-weight: 700;
+// font-size: 24px;
+// line-height: 120%;
+// /* or 29px */
+// display: flex;
+// align-items: center;
+// text-align: center;
+
+// color: #FFFFFF;
+
+// /* Rectangle 26 */
+
+// box-sizing: border-box;
+
+// position: absolute;
+// width: 310px;
+// height: 48px;
+// left: 33px;
+// top: 339px;
+
+// /* Airbean - brown */
+// border: 1px solid #2F2926;
+// border-radius: 6px;
+
+// /* Rectangle 27 */
+
+// box-sizing: border-box;
+
+// position: absolute;
+// width: 310px;
+// height: 48px;
+// left: 33px;
+// top: 421px;
+
+// /* Airbean - brown */
+// border: 1px solid #2F2926;
+// border-radius: 6px;
+
+// /* Rectangle 28 */
+
+// box-sizing: border-box;
+
+// position: absolute;
+// width: 16px;
+// height: 16px;
+// left: 33px;
+// top: 492px;
+
+// /* Airbean - brown */
+// border: 1px solid #2F2926;
+// border-radius: 16px;
+
+// /* Namn */
+
+// position: absolute;
+// width: 279px;
+// height: 16px;
+// left: 33px;
+// top: 319px;
+
+// font-family: 'Work Sans';
+// font-style: normal;
+// font-weight: 400;
+// font-size: 12px;
+// line-height: 120%;
+// /* or 14px */
+// display: flex;
+// align-items: center;
+
+// /* Airbean - brown */
+// color: #2F2926;
+
+// /* Epost */
+
+// position: absolute;
+// width: 279px;
+// height: 16px;
+// left: 33px;
+// top: 401px;
+
+// font-family: 'Work Sans';
+// font-style: normal;
+// font-weight: 400;
+// font-size: 12px;
+// line-height: 120%;
+// /* or 14px */
+// display: flex;
+// align-items: center;
+
+// /* Airbean - brown */
+// color: #2F2926;
+
+// /* GDPR Ok! */
+
+// position: absolute;
+// width: 239px;
+// height: 16px;
+// left: 56px;
+// top: 492px;
+
+// font-family: 'Work Sans';
+// font-style: normal;
+// font-weight: 400;
+// font-size: 12px;
+// line-height: 120%;
+// /* or 14px */
+// display: flex;
+// align-items: center;
+
+// /* Airbean - brown */
+// color: #2F2926;
+
+// /* Sixten Kaffelövér */
+
+// position: absolute;
+// width: 279px;
+// height: 24px;
+// left: 48px;
+// top: 352px;
+
+// font-family: 'Work Sans';
+// font-style: normal;
+// font-weight: 400;
+// font-size: 16px;
+// line-height: 120%;
+// /* or 19px */
+// display: flex;
+// align-items: center;
+
+// /* Airbean - brown */
+// color: #2F2926;
+
+// /* Genom att skapa ett konto nedan kan du spara och se din orderhistorik. */
+
+// position: absolute;
+// width: 305px;
+// height: 56px;
+// left: 35px;
+// top: 230px;
+
+// font-family: 'Work Sans';
+// font-style: normal;
+// font-weight: 400;
+// font-size: 16px;
+// line-height: 150%;
+// /* or 24px */
+// display: flex;
+// align-items: center;
+// text-align: center;
+
+// /* Airbean - brown */
+// color: #2F2926;
+
+// /* sixten.kaffelover@zocom.se */
+
+// position: absolute;
+// width: 279px;
+// height: 24px;
+// left: 48px;
+// top: 433px;
+
+// font-family: 'Work Sans';
+// font-style: normal;
+// font-weight: 400;
+// font-size: 16px;
+// line-height: 120%;
+// /* or 19px */
+// display: flex;
+// align-items: center;
+
+// color: rgba(0, 0, 0, 0.8);
+
+// /* Välkommen till AirBean-familjen! */
+
+// position: absolute;
+// left: 8.27%;
+// right: 9.33%;
+// top: 20.84%;
+// bottom: 64.62%;
+
+// font-family: 'PT Serif';
+// font-style: normal;
+// font-weight: 700;
+// font-size: 32px;
+// line-height: 120%;
+// /* or 38px */
+// display: flex;
+// align-items: center;
+// text-align: center;
+
+// /* Airbean - brown */
+// color: #2F2926;

@@ -1,9 +1,10 @@
 import {
   Route,
-  BrowserRouter as Router,
+  RouterProvider,
   Routes,
+  createBrowserRouter,
+  createRoutesFromElements,
   useLocation,
-  useNavigate,
 } from 'react-router-dom'
 import './App.css'
 import About from './pages/About'
@@ -13,33 +14,25 @@ import Menu from './pages/Menu'
 import Profile from './pages/Profile'
 import Status from './pages/Status'
 
+// let location = useLocation()
+// let background = location.state && location.state.background
 function App() {
-  return (
-    <Router>
-      <ModalSwitch />
-    </Router>
-  )
-}
-
-function ModalSwitch() {
-  const location = useLocation()
-  const background = location.state && location.state.background
-
-  return (
-    <>
-      <Routes location={background || location}>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route>
         <Route path="/" element={<Landing />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/about" element={<About />} />
         <Route path="/status" element={<Status />} />
         <Route path="/profile" element={<Profile />} />
-      </Routes>
+      </Route>
+    )
+  )
 
-      {background && (
-        <Routes>
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-      )}
+  return (
+    <>
+      <RouterProvider router={router} />
     </>
   )
 }

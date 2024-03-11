@@ -6,7 +6,7 @@ interface FetchState<T> {
   error: Error | null
 }
 
-const useFetch = <T>(url: string): FetchState<T> => {
+const useFetch = <T>(url: string, options = {}): FetchState<T> => {
   const [data, setData] = useState<T | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
@@ -14,16 +14,15 @@ const useFetch = <T>(url: string): FetchState<T> => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url)
+        const response = await fetch(url, options)
         if (!response.ok) {
           throw new Error('Something went wrong =(')
         }
-        // console.log(await response)
         const fetchedData = await response.json()
         setData(fetchedData)
         setLoading(false)
         //TODO Här borde jag bli bättre på att hitta alla sorters fel
-        //TODO Kanke en trevlig log över alla error
+        //TODO Kanske en trevlig log över alla error
       } catch (error) {
         if (error instanceof Error) setError(error)
         console.log(error instanceof Error, error)

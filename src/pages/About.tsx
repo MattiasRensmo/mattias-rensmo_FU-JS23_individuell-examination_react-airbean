@@ -8,9 +8,7 @@ import eva from './../assets/img/eva.png'
 const About = () => {
   return (
     <div className={style.pageWrapper}>
-      <Header>
-        <NavButton />
-      </Header>
+      <Header></Header>
       <main className={style.content}>
         <h1>Vårt kaffe</h1>
         <p>
