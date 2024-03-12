@@ -1,140 +1,85 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Fetch from '../hooks/Fetch'
 import useUserSessionStorage from '../hooks/useUserSessionStorage'
-import style from './LoginForm.module.scss'
-
-interface ApiLoginFail {
-  success: false
-  message: string
-}
-
-interface ApiLoginSucces {
-  success: true
-  token: string
-}
-
-type ApiLoginResponse = ApiLoginFail | ApiLoginSucces
-
-interface LoginToken {
-  success: boolean
-  message: string
-}
-
-async function fetchPost(url: string, mail: string, password: string) {
-  try {
-    const response = await fetch(url, {
-      body: JSON.stringify({ username: mail, password }),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    const json: ApiLoginResponse = await response.json()
-    return { success: json.success, message: json.success ? json.token : json.message }
-  } catch (err) {
-    return { success: false, message: 'Something went wrong' }
-  }
-}
-
-async function loginOrCreateAccount(mail: string, password: string): Promise<LoginToken> {
-  // TODO Validate email
-  // ! TODO !! Validate password API kräver att lösen är minst 5 tecken
-
-  //Först testar vi att skapa ett konto
-  const create: LoginToken = await fetchPost(
-    'https://airbean-api-xjlcn.ondigitalocean.app/api/user/signup',
-    mail,
-    password
-  )
-
-  if (create.success) {
-    console.log(`Skapade konto för `, mail)
-  }
-  if (!create.success) {
-    console.log(`Kunde inte skapa konto`, create)
-  }
-
-  //Oavsett hur det går försöker vi sen logga in
-  const { success, message } = await fetchPost(
-    'https://airbean-api-xjlcn.ondigitalocean.app/api/user/login',
-    mail,
-    password
-  )
-  return { success, message }
-}
+import { useLoggedInStateStore } from '../store/useLoggedInStateStore'
 
 const LoginForm = () => {
-  //Form-data
   const [name, setName] = useState('')
-  const [mail, setMail] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [gdprOk, setGdprOk] = useState(false)
 
-  //Session storage
   const [user, updateUser, clearUser] = useUserSessionStorage()
-  // const [loggedIn, setLoggedIn] = useState(false)
-  const [logInMessage, setLogInMessage] = useState('')
+  const { login, signup, getOrderHistory, checkJWT } = Fetch()
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    clearUser()
-    loginOrCreateAccount(mail, password).then((token: LoginToken) => {
-      console.log(token)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-      if (token && token.success) {
-        updateUser(name, mail, token.message)
-        setLogInMessage('')
-      } else {
-        setLogInMessage(token.message)
-      }
-    })
+  const { loggedIn, setLoggedIn } = useLoggedInStateStore()
+
+  const handleLogin = async () => {
+    try {
+      setLoading(true)
+      const data = await login({ username: email, password })
+      console.log(data)
+      await updateUser(name, email, data.token)
+      console.log(name, email, data.token)
+
+      // fetchOrderHistory(data.token)
+    } catch (err) {
+      console.error('Error logging in:', err)
+      setError('Error logging in')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleSignup = async () => {
+    try {
+      setLoading(true)
+      const data = await signup({ username: email, password })
+      console.log(data)
+      handleLogin()
+    } catch (err) {
+      console.error('Error signing up:', err)
+      setError('Error signing up')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <form className={style.loginForm} onSubmit={handleSubmit}>
-      <label htmlFor="loginName">Namn</label>
+    <div>
       <input
         type="text"
-        id="loginName"
+        placeholder="Namn"
         value={name}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+        onChange={e => setName(e.target.value)}
       />
-
-      <label htmlFor="loginMail">Epost</label>
       <input
-        type="text"
-        id="loginMail"
-        value={mail}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => setMail(e.target.value)}
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
       />
-
-      <label htmlFor="loginPassword">Lösenord</label>
       <input
         type="password"
-        id="loginPassword"
+        placeholder="Password"
         value={password}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+        onChange={e => setPassword(e.target.value)}
       />
-
-      <span>
+      <label>
         <input
           type="checkbox"
-          id="loginGdpr"
           checked={gdprOk}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setGdprOk(e.target.checked)}
+          onChange={e => setGdprOk(e.target.checked)}
         />
-        <label htmlFor="loginGdpr">GDPR Ok!</label>
-      </span>
-
-      <button type="submit">BREW ME A CUP</button>
-      <p>{logInMessage}</p>
-      <p>
-        {name + ' '}
-        {mail + ' '}
-        {password + ' '}
-        {gdprOk ? 'true' : 'false'}
-      </p>
-      <p>Hämtade användare: {JSON.stringify(user)}</p>
-    </form>
+        GDPR Ok!
+      </label>
+      <button onClick={handleSignup}>Brew me a cup!</button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+    </div>
   )
 }
 

@@ -59,7 +59,6 @@ const Profile = (props: Props) => {
   return (
     <div className={style.pageWrapper}>
       <Header></Header>
-      {/* <div>{JSON.stringify(user)}</div> */}
       {!loggedIn ? (
         <main className={style.contentLoggedOut}>
           <img src={logo} alt="Logotype AirBean" />

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import CartRow from '../components/CartRow'
+import Fetch from '../hooks/Fetch'
+import useUserSessionStorage from '../hooks/useUserSessionStorage'
 import { CartItem } from '../interfaces/Cart'
 import { useCartStateStore } from '../store/useCartStateStore'
 import { useModalStateStore } from '../store/useModalStateStore'
@@ -29,7 +31,7 @@ export interface OrderResponse {
   orderNr: string
 }
 
-function prepareForOrder(data: CartItem[]): string {
+function prepareForOrder(data: CartItem[]): any {
   const coffeeOrder: OrderObject = { details: { order: [] } }
 
   data.forEach(item => {
@@ -37,7 +39,7 @@ function prepareForOrder(data: CartItem[]): string {
       coffeeOrder.details.order.push({ name: item.title, price: item.price })
     }
   })
-  return JSON.stringify(coffeeOrder)
+  return coffeeOrder
 }
 
 function Cart() {
@@ -55,19 +57,60 @@ function Cart() {
 
   const noClick = (e: React.MouseEvent) => e.stopPropagation()
 
+  // const handleClick = () => {
+  //   if (!cart.length) return
+  //   const abortController = new AbortController()
+
+  //   fetch('https://airbean-api-xjlcn.ondigitalocean.app/api/beans/order', {
+  //     signal: abortController.signal,
+  //     method: 'POST',
+  //     body: prepareForOrder(cart),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setOrderEta(data.eta)
+  //       setOrderNum(data.orderNr)
+  //       emptyCart()
+  //       navigate('/status')
+  //     })
+  //     .catch(err => console.log(err))
+  //   //Avbryt så vi endast gör en order
+  //   return () => abortController.abort()
+  // }
+
+  //NYTT TEST
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  const [user, updateUser, clearUser] = useUserSessionStorage()
+  const { placeOrder, checkJWT, loading, error } = Fetch()
+
+  useEffect(() => {
+    const token = user.jwtToken
+    if (token) {
+      checkJWT(token)
+        .then((res: any) => {
+          if (res.success) {
+            setLoggedIn(true)
+            // fetchOrderHistory(token)
+          }
+        })
+        .catch((err: any) => {
+          console.error('Error checking JWT:', err)
+          clearUser()
+          setLoggedIn(false)
+        })
+    }
+  }, [])
+
   const handleClick = () => {
     if (!cart.length) return
-    const abortController = new AbortController()
 
-    fetch('https://airbean-api-xjlcn.ondigitalocean.app/api/beans/order', {
-      signal: abortController.signal,
-      method: 'POST',
-      body: prepareForOrder(cart),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
+    // console.log('⭕  handleClick  prepareForOrder(cart):', prepareForOrder(cart))
+    // console.log('⭕  handleClick  user.jwtToken:', user.jwtToken)
+    placeOrder(prepareForOrder(cart), user.jwtToken)
       .then(data => {
         setOrderEta(data.eta)
         setOrderNum(data.orderNr)
@@ -75,13 +118,12 @@ function Cart() {
         navigate('/status')
       })
       .catch(err => console.log(err))
-    //Avbryt så vi endast gör en order
-    return () => abortController.abort()
   }
 
   return (
     <div className={style.modalWrapper} onClick={() => closeModal()}>
       <div className={style.modalContent} onClick={noClick}>
+        <p>{loggedIn ? 'Inloggad' : 'Utloggad'}</p>
         <div className={style.menu}>
           {cart.map(item => (
             <CartRow {...item} key={item.id} />
@@ -97,4 +139,5 @@ function Cart() {
     </div>
   )
 }
+
 export default Cart

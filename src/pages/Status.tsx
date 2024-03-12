@@ -19,6 +19,7 @@ const Status = () => {
     // TODO Kolla att det är Error 401 för att vi ska ta bort - annars borde vi visa error
     if (user.jwtToken) checkJWT(user.jwtToken).catch(() => clearUser())
 
+    console.log(orderNum)
     if (!orderNum) return setOrderEta(0)
     getOrderStatus(orderNum, user.jwtToken)
       .then((statusData: any) => {
@@ -56,8 +57,9 @@ const Status = () => {
 
   const noOrderContent = (
     <>
+      {/* <p>TEST {orderNum}</p> */}
       <img src={drone} alt="Drönare" />
-      <h1>Hittar ingen beställning!</h1>
+      <h1>Hittar ingen pågående beställning!</h1>
       <button onClick={() => navigate('/menu')}>Order more!</button>
     </>
   )
