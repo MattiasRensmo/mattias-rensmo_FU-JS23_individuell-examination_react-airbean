@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import drone from '../assets/img/drone.svg'
+import Button from '../components/Button'
 import Fetch from '../hooks/Fetch'
 import useUserSessionStorage from '../hooks/useUserSessionStorage'
 import { useOrderStateStore } from '../store/useOrderStateStore'
@@ -8,7 +9,8 @@ import style from './Status.module.scss'
 
 const Status = () => {
   const [user, updateUser, clearUser] = useUserSessionStorage()
-  const { orderEta, orderNum, setOrderNum, setOrderEta, decrementOrderEta } = useOrderStateStore()
+  const { orderEta, orderNum, setOrderNum, setOrderEta, decrementOrderEta } =
+    useOrderStateStore()
   const navigate = useNavigate()
 
   // TEST
@@ -47,11 +49,17 @@ const Status = () => {
 
   const orderContent = (
     <>
-      <p>Ordernummer {orderNum}</p>
+      <p className={style.translucent}>
+        Ordernummer <span className={style.bold}>#{orderNum}</span>
+      </p>
       <img src={drone} alt="Drönare" />
       <h1>Din beställning är på väg!</h1>
-      <p>Eta: {orderEta} minuter</p>
-      <button onClick={() => navigate('/')}>Ok, cool!</button>
+      <p className={style.large}>
+        <span className={style.bold}>{orderEta}</span> minuter
+      </p>
+      <Button variant="light" onClick={() => navigate('/')}>
+        Ok, cool!
+      </Button>
     </>
   )
 
@@ -59,8 +67,12 @@ const Status = () => {
     <>
       {/* <p>TEST {orderNum}</p> */}
       <img src={drone} alt="Drönare" />
-      <h1>Hittar ingen pågående beställning!</h1>
-      <button onClick={() => navigate('/menu')}>Order more!</button>
+      <h1 style={{ textAlign: 'center' }}>
+        Hittar ingen pågående beställning!
+      </h1>
+      <Button variant="light" onClick={() => navigate('/menu')}>
+        Order something!
+      </Button>
     </>
   )
 

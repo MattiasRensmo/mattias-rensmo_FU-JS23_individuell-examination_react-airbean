@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import Button from '../components/Button'
 import CartRow from '../components/CartRow'
 import Fetch from '../hooks/Fetch'
 import useUserSessionStorage from '../hooks/useUserSessionStorage'
@@ -120,21 +121,35 @@ function Cart() {
       .catch(err => console.log(err))
   }
 
+  function calcTotal(cart: CartItem[]) {
+    return cart.reduce(
+      (accumulator, current) => accumulator + current.price * current.amount,
+      0
+    )
+  }
+
   return (
     <div className={style.modalWrapper} onClick={() => closeModal()}>
       <div className={style.modalContent} onClick={noClick}>
-        <p>{loggedIn ? 'Inloggad' : 'Utloggad'}</p>
-        <div className={style.menu}>
-          {cart.map(item => (
-            <CartRow {...item} key={item.id} />
-          ))}
+        <h1 className={style.subPageTitle}>Din beställning</h1>
+        <div className={style.menuWrapper}>
+          <div className={style.menu}>
+            {cart.map(item => (
+              <CartRow {...item} key={item.id} />
+            ))}
+          </div>
+          <div className={style.cartFooter}>
+            <div className={style.totalRow}>
+              <p className={style.title}>Total: </p>
+              <p>{calcTotal(cart)}</p>
+            </div>
+            <p className={style.slug}>inkl moms + drönarleverans</p>
+
+            <Button variant="dark" onClick={handleClick}>
+              Take my money!
+            </Button>
+          </div>
         </div>
-        <p>
-          Total:{' '}
-          {cart.reduce((accumulator, current) => accumulator + current.price * current.amount, 0)}
-        </p>
-        <p>inkl moms + drönarleverans</p>
-        <button onClick={handleClick}>Take my money!</button>
       </div>
     </div>
   )

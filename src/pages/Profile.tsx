@@ -7,8 +7,10 @@ import useUserSessionStorage from '../hooks/useUserSessionStorage'
 import { OrderHistory, OrderHistoryResponse } from '../interfaces/orderHistory'
 import style from './Profile.module.scss'
 
+import { Link } from 'react-router-dom'
 import logo from '../assets/img/logo_dark.svg'
 import profilePic from '../assets/img/profile.svg'
+import Button from '../components/Button'
 import { useLoggedInStateStore } from '../store/useLoggedInStateStore'
 
 const Profile: React.FC = () => {
@@ -30,18 +32,25 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     const token = user.jwtToken
+    console.log('token', token)
+
     if (token) {
       checkJWT(token)
         .then((res: any) => {
+          console.log('res check token', res)
+
           if (res.success) {
             setLoggedIn(true)
             fetchOrderHistory(token)
+            setError(null)
           }
         })
         .catch((err: any) => {
           console.error('Error checking JWT:', err)
           setLoggedIn(false)
         })
+    } else {
+      setLoggedIn(false)
     }
   }, [user])
 
@@ -81,7 +90,7 @@ const Profile: React.FC = () => {
     try {
       setLoading(true)
       const data: OrderHistoryResponse = await getOrderHistory(JWT)
-      // console.log(data)
+      console.log('orderhistorik', data)
 
       data.success ? setOrders(data.orderHistory) : setOrders([])
     } catch (err) {
@@ -101,27 +110,32 @@ const Profile: React.FC = () => {
     return (
       <div className={style.pageWrapper}>
         <Header></Header>
-        <div className={style.contentLoggedIn}>
+        <div className={[style.contentLoggedIn, style.content].join(' ')}>
+          <a className={style.logoutText} onClick={handleLogout}>
+            Logout
+          </a>
           <img src={profilePic} alt="Generisk profilbild" />
           <h1>{user.name}</h1>
           <p>{user.email}</p>
-          <button onClick={handleLogout}>Logout</button>
           {loading ? (
             <p>Loading order history...</p>
           ) : (
-            <div>
+            <>
               <h2>Orderhistorik</h2>
-              {orders?.map(item => (
-                <HistoryRow {...item} key={item.orderNr} />
-              ))}
-              <p>
-                Totalt spenderat{' '}
-                {orders?.reduce(
-                  (accumulator, current) => accumulator + current.total,
-                  0
-                )}
-              </p>
-            </div>
+              <div className={style.orderHistoryTable}>
+                {orders?.map(item => (
+                  <HistoryRow {...item} key={item.orderNr} />
+                ))}
+                <p className={style.totalLine}>Totalt spenderat</p>
+                <p className={style.totalLine} style={{ textAlign: 'right' }}>
+                  {orders?.reduce(
+                    (accumulator, current) => accumulator + current.total,
+                    0
+                  )}{' '}
+                  kr
+                </p>
+              </div>
+            </>
           )}
           {error && <p>Error: {error}</p>}
         </div>
@@ -131,43 +145,54 @@ const Profile: React.FC = () => {
     return (
       <div className={style.pageWrapper}>
         <Header></Header>
-        <div className={style.contentLoggedOut}>
+        <div className={[style.contentLoggedOut, style.content].join(' ')}>
           <img src={logo} alt="Logotype AirBean" />
-          <h1>Välkommen till AirBean-familjen!</h1>
+          <h1>
+            Välkommen till
+            <br /> AirBean-familjen!
+          </h1>
           <p>
             Genom att skapa ett konto nedan kan du spara och se din
             orderhistorik.
           </p>
-          <div>
+          <div className={style.form}>
+            <label htmlFor="name">Namn</label>
             <input
+              id="name"
               type="text"
-              placeholder="Namn"
               value={name}
               onChange={e => setName(e.target.value)}
             />
+            <label htmlFor="email">Epost</label>
             <input
+              id="email"
               type="email"
-              placeholder="Email"
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
+            <label htmlFor="password">Lösenord</label>
             <input
               type="password"
-              placeholder="Password"
+              // placeholder="Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
-            <label>
+            <span>
               <input
+                id="gdprOk"
                 type="checkbox"
                 checked={gdprOk}
                 onChange={e => setGdprOk(e.target.checked)}
               />
-              GDPR Ok!
-            </label>
-            <button onClick={handleSignup}>Brew me a cup!</button>
+              <label htmlFor="gdprOk">GDPR Ok!</label>
+            </span>
+
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
+            {/* <button onClick={handleSignup}>Brew me a cup!</button> */}
+            <Button variant="dark" onClick={handleSignup}>
+              Brew me a cup!
+            </Button>
           </div>
         </div>
       </div>

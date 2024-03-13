@@ -8,21 +8,29 @@
 
 .title {
   grid-area: title;
-  max-width: 308px;
+  // max-width: 308px;
   overflow: hidden;
   text-wrap: nowrap;
   white-space: nowrap;
   grid-row: 1;
+
+  font-family: 'PT Serif';
+  font-weight: 700;
+  font-size: 23px;
 }
 
 .title::after {
   letter-spacing: 0.2em;
+  font-size: 8px;
+  opacity: 0.4;
   content: ' ........................................';
 }
 
 .desc {
   grid-area: title;
   grid-row: 2;
+  font-size: 12px;
+  font-family: 'Work Sans';
 }
 
 .price {
@@ -31,4 +39,18 @@
   align-self: start;
   display: flex;
   flex-direction: column;
+
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+
+  text-align: center;
+
+  color: $brown;
+  margin-top: -0.3em;
+}
+
+.arrow {
+  cursor: pointer;
 }

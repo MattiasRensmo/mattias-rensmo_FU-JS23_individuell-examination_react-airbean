@@ -25,9 +25,13 @@ const CartRow = ({ id, title, desc, price, amount }: Props) => {
       <h3 className={style.title}>{title}</h3>
       <p className={style.desc}>{price * amount} kr</p>
       <div className={style.price}>
-        <p onClick={() => increment(id)}>&and;</p>
+        <p className={style.arrow} onClick={() => increment(id)}>
+          &and;
+        </p>
         <p>{amount}</p>
-        <p onClick={() => decrement(id)}>&or;</p>{' '}
+        <p className={style.arrow} onClick={() => decrement(id)}>
+          &or;
+        </p>{' '}
       </div>
     </div>
   )

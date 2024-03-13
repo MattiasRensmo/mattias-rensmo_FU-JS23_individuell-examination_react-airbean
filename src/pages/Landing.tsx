@@ -6,8 +6,8 @@ const Landing = () => {
     <Link to="/menu">
       <div className={styles.wrapper}>
         <img src={logo} alt="Air Bean logotype" />
-        <h1>AIR BEAN</h1>
-        <h2>DRONEDELIVERED COFFEE</h2>
+        <h1 className={styles.pageTitle}>AIR BEAN</h1>
+        <h2 className={styles.pageSubTitle}>DRONEDELIVERED COFFEE</h2>
       </div>
     </Link>
   )

@@ -1,55 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Rufina:wght@400;700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-.rufina-regular {
-  font-family: 'Rufina', serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.rufina-bold {
-  font-family: 'Rufina', serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.pt-serif-regular {
-  font-family: 'PT Serif', serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.pt-serif-regular-italic {
-  font-family: 'PT Serif', serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.pt-serif-bold {
-  font-family: 'PT Serif', serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.pt-serif-bold-italic {
-  font-family: 'PT Serif', serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-// <uniquifier>: Use a unique and descriptive class name
-// <weight>: Use a value from 100 to 900
-
-.work-sans-normal {
-  font-family: 'Work Sans', sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-a {
-  color: unset;
-  text-decoration: unset;
-}
+$green: #38846d;
+$pink: #f3e4e1;
+$brown: #2f2926;
+$orange: #e5674e;
 
 .pageWrapper {
   min-height: 100lvh;
@@ -59,13 +13,9 @@ a {
 
   font-family: 'Work Sans', sans-serif;
   line-height: 1.5;
-  // font-optical-sizing: auto;
-  // font-weight: 400;
   font-style: normal;
 
-  // > * {
-  //   border: 1px solid green;
-  // }
+  color: $brown;
 }
 
 .content {
@@ -76,6 +26,18 @@ a {
   margin: 1rem;
 }
 
-.noScroll {
-  overflow: hidden;
+.subPageTitle {
+  font-family: 'PT Serif';
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 120%;
+  text-align: center;
+  color: $brown;
+  margin-top: 0rem;
+  margin-bottom: 2rem;
+}
+
+a {
+  color: unset;
+  text-decoration: unset;
 }

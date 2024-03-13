@@ -10,7 +10,7 @@ const About = () => {
     <div className={style.pageWrapper}>
       <Header></Header>
       <main className={style.content}>
-        <h1>Vårt kaffe</h1>
+        <h1 className={style.subPageTitle}>Vårt kaffe</h1>
         <p>
           Pumpkin spice mug, barista cup, sit macchiato, kopi-luwak, doppio,
           grounds dripper, crema, strong whipped, variety extra iced id lungo
@@ -36,10 +36,10 @@ const About = () => {
           affogato viennese cultivar aftertaste, seasonal, percolator cream
           black, galão flavour, milk aromatic turkish skinny crema.
         </p>
-        <section>
+        <section className={style.byline}>
           <img src={eva} alt="Eva Cortado" />
-          <p>Eva Cortado</p>
-          <p>VD & Grundare</p>
+          <p className={style.name}>Eva Cortado</p>
+          <p className={style.title}>VD & Grundare</p>
         </section>
       </main>
       <Footer />

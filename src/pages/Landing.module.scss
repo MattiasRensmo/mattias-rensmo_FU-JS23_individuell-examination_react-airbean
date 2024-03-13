@@ -15,3 +15,22 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.pageTitle,
+.pageSubTitle {
+  color: white;
+  font-size: 42px;
+}
+
+.pageTitle {
+  font-family: 'Rufina', serif;
+  font-weight: 700;
+}
+
+.pageSubTitle {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+}

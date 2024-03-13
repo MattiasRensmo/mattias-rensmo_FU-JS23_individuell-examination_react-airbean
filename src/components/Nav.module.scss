@@ -2,8 +2,6 @@
 
 .pageWrapper {
   position: absolute;
-  // min-height: 100lvh;
-  // min-width: 100lvw;
   z-index: 1;
   top: 0;
   left: 0;
@@ -27,8 +25,23 @@
 
 .navItem {
   list-style: none;
+
+  font-family: 'PT Serif';
+  font-weight: 700;
+  font-size: 32px;
+
+  .active {
+    opacity: 0.5;
+    cursor: default;
+  }
 }
 
-// .menuIcon {
-//   height: 3rem;
-// }
+.navItem:not(:first-child)::before {
+  content: ' ';
+  opacity: 0.2;
+  display: block;
+  text-align: center;
+  border-top: 1px solid white;
+  width: 48px;
+  margin: 1rem auto;
+}

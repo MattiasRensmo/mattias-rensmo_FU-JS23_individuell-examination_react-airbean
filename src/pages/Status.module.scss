@@ -3,9 +3,38 @@
 .noHeaderWrapper {
   background-color: $orange;
   min-height: 100lvh;
+  // width: 100lvw;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  padding: 4rem;
+  padding: 2rem;
+
+  text-align: center;
+  color: white;
+
+  h1 {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    width: 19rem;
+  }
+
+  p {
+    font-family: 'Work Sans';
+    font-size: 16px;
+  }
+
+  .translucent {
+    opacity: 0.7;
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+
+  .large {
+    font-size: 22px;
+  }
 }

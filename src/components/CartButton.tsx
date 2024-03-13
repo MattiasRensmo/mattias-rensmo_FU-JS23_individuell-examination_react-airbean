@@ -18,7 +18,12 @@ const CartButton = (props: Props) => {
 
   return (
     <div className={style.container}>
-      {numItems > 0 && <p className={style.numItems}>{numItems}</p>}
+      {numItems > 0 && (
+        <div className={style.numItemsBackground}>
+          {' '}
+          <p className={style.numItems}>{numItems}</p>{' '}
+        </div>
+      )}
       <img
         src={cartIcon}
         alt="Cart"

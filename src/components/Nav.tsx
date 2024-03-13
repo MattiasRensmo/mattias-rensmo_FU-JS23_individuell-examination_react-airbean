@@ -1,33 +1,54 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useModalStateStore } from '../store/useModalStateStore'
+import { useNavStateStore } from '../store/useNavStateStore'
 import close from './../assets/img/icons/close.svg'
 import style from './Nav.module.scss'
 
-interface Props {
-  toggle: () => void
-}
-
-const Nav = ({ toggle }: Props) => {
-  // const { toggleModalVisible, modalVisible } = useModalStateStore()
+const Nav = () => {
+  const { navVisible, setNavVisible } = useNavStateStore()
+  const { toggleModalVisible, modalVisible, setModalVisible } =
+    useModalStateStore()
 
   return (
     <div className={style.pageWrapper}>
       <header className={style.header}>
-        <img src={close} onClick={toggle} />
+        <img
+          src={close}
+          onClick={() => {
+            setNavVisible(false)
+            setModalVisible(false)
+          }}
+        />
       </header>
 
       <menu className={style.content}>
         <li className={style.navItem}>
-          <Link to="/menu">Meny</Link>
+          <NavLink
+            className={({ isActive }) => (isActive ? style.active : '')}
+            to="/menu">
+            Meny
+          </NavLink>
         </li>
         <li className={style.navItem}>
-          <Link to="/about">Vårt kaffe</Link>
+          <NavLink
+            className={({ isActive }) => (isActive ? style.active : '')}
+            to="/about">
+            Vårt kaffe
+          </NavLink>
         </li>
         <li className={style.navItem}>
-          <Link to="/profile">Min profil</Link>
+          <NavLink
+            className={({ isActive }) => (isActive ? style.active : '')}
+            to="/profile">
+            Min profil
+          </NavLink>
         </li>
         <li className={style.navItem}>
-          <Link to="/status">Orderstatus</Link>
+          <NavLink
+            className={({ isActive }) => (isActive ? style.active : '')}
+            to="/status">
+            Orderstatus
+          </NavLink>
         </li>
       </menu>
     </div>
