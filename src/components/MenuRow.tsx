@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import plus from '../assets/img/icons/plus.svg'
 import useDebounce from '../hooks/useDebounce'
 import { useCartStateStore } from '../store/useCartStateStore'
@@ -12,10 +11,9 @@ interface Props {
 }
 
 const MenuRow = ({ id, title, desc, price }: Props) => {
-  const { cart, addToCart } = useCartStateStore()
+  const { addToCart } = useCartStateStore()
 
   const handleClick = useDebounce(() => {
-    // Your debounced function logic here
     addToCart({ id, title, desc, price }, 1)
   }, 100)
 

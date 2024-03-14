@@ -2,17 +2,18 @@
 
 .wrapper {
   height: 113px;
+
   padding: 0.8rem;
 
   background-image: url(./../assets/img/background/top.svg);
   background-repeat: no-repeat;
   background-size: cover;
+  // z-index: 1;
 
-  display: flex;
-  justify-content: space-between;
+  .content {
+    // margin-top: 3px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
 }
-
-// .menuIcon {
-//   height: 3rem;
-//   z-index: 4;
-// }

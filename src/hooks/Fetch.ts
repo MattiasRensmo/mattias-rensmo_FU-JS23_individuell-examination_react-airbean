@@ -88,7 +88,6 @@ function Fetch() {
         Authorization: `Bearer ${JWT}`,
       },
     })
-    console.log('CheckJWT', status)
     return status
   }
 

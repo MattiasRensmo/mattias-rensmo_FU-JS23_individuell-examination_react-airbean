@@ -5,6 +5,8 @@ $pink: #f3e4e1;
 $brown: #2f2926;
 $orange: #e5674e;
 
+$maxWidthContent: 400px;
+
 .pageWrapper {
   min-height: 100lvh;
   display: grid;
@@ -20,10 +22,10 @@ $orange: #e5674e;
 
 .content {
   overflow-y: hidden;
-  max-width: 600px;
+  max-width: $maxWidthContent;
   margin: 0 auto;
   padding: 1rem;
-  margin: 1rem;
+  margin: 1rem auto;
 }
 
 .subPageTitle {

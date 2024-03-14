@@ -13,9 +13,10 @@
 
 .modalContent {
   // background-color: red;
-  margin: 5rem 1rem 1rem;
+  margin: 5rem auto 1rem;
   padding: 1rem;
   height: 80lvh;
+  width: min($maxWidthContent, 100lvw);
   background-color: white;
 
   .subPageTitle {
@@ -35,7 +36,6 @@
 }
 
 .menu {
-  // padding: 1rem;
   display: grid;
   grid-template-columns: auto max-content;
   gap: 1rem;
@@ -61,7 +61,7 @@
 
 .title {
   grid-area: title;
-  // max-width: 308px;
+  width: 308px;
   overflow: hidden;
   text-wrap: nowrap;
   white-space: nowrap;
@@ -72,12 +72,11 @@
   letter-spacing: 0.2em;
   font-size: 8px;
   opacity: 0.4;
-  content: ' ........................................';
+  content: ' ....................................................................................';
 }
 
 .cartFooter {
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
-  // align-items: center;
 }

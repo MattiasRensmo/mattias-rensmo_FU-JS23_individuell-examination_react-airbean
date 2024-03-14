@@ -1,13 +1,12 @@
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useModalStateStore } from '../store/useModalStateStore'
 import { useNavStateStore } from '../store/useNavStateStore'
 import close from './../assets/img/icons/close.svg'
 import style from './Nav.module.scss'
 
 const Nav = () => {
-  const { navVisible, setNavVisible } = useNavStateStore()
-  const { toggleModalVisible, modalVisible, setModalVisible } =
-    useModalStateStore()
+  const { setNavVisible } = useNavStateStore()
+  const { setModalVisible } = useModalStateStore()
 
   return (
     <div className={style.pageWrapper}>

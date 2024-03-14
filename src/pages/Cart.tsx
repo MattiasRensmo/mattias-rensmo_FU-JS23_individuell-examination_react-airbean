@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
 import CartRow from '../components/CartRow'
@@ -58,34 +58,9 @@ function Cart() {
 
   const noClick = (e: React.MouseEvent) => e.stopPropagation()
 
-  // const handleClick = () => {
-  //   if (!cart.length) return
-  //   const abortController = new AbortController()
+  // const [loggedIn, setLoggedIn] = useState(false)
 
-  //   fetch('https://airbean-api-xjlcn.ondigitalocean.app/api/beans/order', {
-  //     signal: abortController.signal,
-  //     method: 'POST',
-  //     body: prepareForOrder(cart),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setOrderEta(data.eta)
-  //       setOrderNum(data.orderNr)
-  //       emptyCart()
-  //       navigate('/status')
-  //     })
-  //     .catch(err => console.log(err))
-  //   //Avbryt så vi endast gör en order
-  //   return () => abortController.abort()
-  // }
-
-  //NYTT TEST
-  const [loggedIn, setLoggedIn] = useState(false)
-
-  const [user, updateUser, clearUser] = useUserSessionStorage()
+  const { user, updateUser, clearUser } = useUserSessionStorage()
   const { placeOrder, checkJWT, loading, error } = Fetch()
 
   useEffect(() => {
@@ -94,14 +69,11 @@ function Cart() {
       checkJWT(token)
         .then((res: any) => {
           if (res.success) {
-            setLoggedIn(true)
-            // fetchOrderHistory(token)
           }
         })
         .catch((err: any) => {
           console.error('Error checking JWT:', err)
           clearUser()
-          setLoggedIn(false)
         })
     }
   }, [])
@@ -109,8 +81,6 @@ function Cart() {
   const handleClick = () => {
     if (!cart.length) return
 
-    // console.log('⭕  handleClick  prepareForOrder(cart):', prepareForOrder(cart))
-    // console.log('⭕  handleClick  user.jwtToken:', user.jwtToken)
     placeOrder(prepareForOrder(cart), user.jwtToken)
       .then(data => {
         setOrderEta(data.eta)
@@ -118,7 +88,7 @@ function Cart() {
         emptyCart()
         navigate('/status')
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   function calcTotal(cart: CartItem[]) {

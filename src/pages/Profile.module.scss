@@ -5,6 +5,8 @@
 }
 
 .content {
+  width: min($maxWidthContent, 100lvw);
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,8 +28,8 @@
 }
 
 .contentLoggedOut {
-  margin-top: -2rem;
-  max-width: 341px;
+  margin-top: -1rem;
+  // max-width: 341px;
   min-height: 560px;
   background: $pink;
   color: $brown;
@@ -51,6 +53,11 @@
       font-size: 12px;
     }
 
+    .alert {
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
     input {
       margin-bottom: 1rem;
       padding: 1rem;
@@ -63,7 +70,7 @@
       font-size: 16px;
     }
 
-    span {
+    span.gdprBox {
       display: flex;
       gap: 0.3rem;
       align-items: center;
@@ -108,6 +115,7 @@
 }
 
 .contentLoggedIn {
+  // width: min($maxWidthContent, 100lvw);
   color: white;
   margin-top: -1rem;
 

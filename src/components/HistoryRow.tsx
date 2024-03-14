@@ -1,4 +1,3 @@
-import React from 'react'
 import { OrderHistory } from '../interfaces/orderHistory'
 import style from './HistoryRow.module.scss'
 

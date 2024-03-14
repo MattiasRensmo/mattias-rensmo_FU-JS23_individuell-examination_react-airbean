@@ -4,14 +4,12 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import MenuRow from '../components/MenuRow'
 import Fetch from '../hooks/Fetch'
-import useFetch from '../hooks/useFetch'
+
 import { CoffeeMenu } from '../interfaces/CoffeeMenu'
-import { useModalStateStore } from '../store/useModalStateStore'
+
 import style from './Menu.module.scss'
 
 const Menu = () => {
-  const { modalVisible } = useModalStateStore()
-
   const { getMenu, loading, error } = Fetch() // Initialize the Fetch hook
   const [menu, setMenu] = useState<any[]>([])
 

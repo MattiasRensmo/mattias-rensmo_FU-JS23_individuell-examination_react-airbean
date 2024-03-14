@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import drone from '../assets/img/drone.svg'
 import Button from '../components/Button'
 import Fetch from '../hooks/Fetch'
@@ -8,7 +8,7 @@ import { useOrderStateStore } from '../store/useOrderStateStore'
 import style from './Status.module.scss'
 
 const Status = () => {
-  const [user, updateUser, clearUser] = useUserSessionStorage()
+  const { user, clearUser } = useUserSessionStorage()
   const { orderEta, orderNum, setOrderNum, setOrderEta, decrementOrderEta } =
     useOrderStateStore()
   const navigate = useNavigate()
@@ -21,7 +21,6 @@ const Status = () => {
     // TODO Kolla att det är Error 401 för att vi ska ta bort - annars borde vi visa error
     if (user.jwtToken) checkJWT(user.jwtToken).catch(() => clearUser())
 
-    console.log(orderNum)
     if (!orderNum) return setOrderEta(0)
     getOrderStatus(orderNum, user.jwtToken)
       .then((statusData: any) => {
@@ -65,7 +64,6 @@ const Status = () => {
 
   const noOrderContent = (
     <>
-      {/* <p>TEST {orderNum}</p> */}
       <img src={drone} alt="Drönare" />
       <h1 style={{ textAlign: 'center' }}>
         Hittar ingen pågående beställning!

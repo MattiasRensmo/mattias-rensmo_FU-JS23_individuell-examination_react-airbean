@@ -1,20 +1,17 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect } from 'react'
 
-import { useLocation } from 'react-router-dom'
 import { useModalStateStore } from '../store/useModalStateStore'
 import { useNavStateStore } from '../store/useNavStateStore'
 import style from './Header.module.scss'
 import Nav from './Nav'
 import NavButton from './NavButton'
-// import Nav from './Nav'
 
 type Props = {
   children?: ReactNode
 }
 
 const Header = (props: Props) => {
-  const { toggleModalVisible, modalVisible, setModalVisible } =
-    useModalStateStore()
+  const { modalVisible, setModalVisible } = useModalStateStore()
 
   const { navVisible, setNavVisible } = useNavStateStore()
 
@@ -32,10 +29,12 @@ const Header = (props: Props) => {
   if (navVisible) return <Nav />
   return (
     <header className={style.wrapper}>
-      <div onClick={() => setNavVisible(true)}>
-        <NavButton />
+      <div className={style.content}>
+        <div onClick={() => setNavVisible(true)}>
+          <NavButton />
+        </div>
+        {props.children}
       </div>
-      {props.children}
     </header>
   )
 }

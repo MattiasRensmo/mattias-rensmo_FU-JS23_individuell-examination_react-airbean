@@ -8,9 +8,9 @@ export const useCartStateStore = create<Cart>()(set => ({
   numItems: 0,
   addToCart: (product, amount) =>
     set(currentState => {
-      // console.log('adding to state', product)
-
-      const existingItemIndex = currentState.cart.findIndex(item => item.id === product.id)
+      const existingItemIndex = currentState.cart.findIndex(
+        item => item.id === product.id
+      )
       //Om vi inte hittade inget
       if (existingItemIndex !== -1) {
         const updatedCart = [...currentState.cart]
@@ -30,7 +30,9 @@ export const useCartStateStore = create<Cart>()(set => ({
     }),
   increment: id =>
     set(currentState => {
-      const existingItemIndex = currentState.cart.findIndex(item => item.id === id)
+      const existingItemIndex = currentState.cart.findIndex(
+        item => item.id === id
+      )
       //Om vi inte hittade inget
       if (existingItemIndex !== -1) {
         const updatedCart = [...currentState.cart]
@@ -46,7 +48,9 @@ export const useCartStateStore = create<Cart>()(set => ({
     }),
   decrement: id =>
     set(currentState => {
-      const existingItemIndex = currentState.cart.findIndex(item => item.id === id)
+      const existingItemIndex = currentState.cart.findIndex(
+        item => item.id === id
+      )
       //Om vi inte hittade inget
       if (existingItemIndex !== -1) {
         let updatedCart = [...currentState.cart]

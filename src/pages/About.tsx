@@ -2,7 +2,6 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import style from './About.module.scss'
 
-import NavButton from '../components/NavButton'
 import eva from './../assets/img/eva.png'
 
 const About = () => {

@@ -8,7 +8,6 @@
 
 .title {
   grid-area: title;
-  // max-width: 308px;
   overflow: hidden;
   text-wrap: nowrap;
   white-space: nowrap;
@@ -23,7 +22,7 @@
   letter-spacing: 0.2em;
   font-size: 8px;
   opacity: 0.4;
-  content: ' ........................................';
+  content: ' ......................................................................................';
 }
 
 .desc {

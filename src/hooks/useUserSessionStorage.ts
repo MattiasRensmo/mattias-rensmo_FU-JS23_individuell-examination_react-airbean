@@ -9,7 +9,9 @@ interface User {
 const useUserSessionStorage = (key = 'user') => {
   const [user, setUser] = useState<User>(() => {
     const storedUser = sessionStorage.getItem(key)
-    return storedUser ? JSON.parse(storedUser) : { name: null, email: null, jwtToken: null }
+    return storedUser
+      ? JSON.parse(storedUser)
+      : { name: null, email: null, jwtToken: null }
   })
 
   useEffect(() => {
@@ -28,7 +30,7 @@ const useUserSessionStorage = (key = 'user') => {
     setUser({ name: null, email: null, jwtToken: null })
   }
 
-  return [user, updateUser, clearUser] as const
+  return { user, updateUser, clearUser } as const
 }
 
 export default useUserSessionStorage

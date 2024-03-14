@@ -21,6 +21,9 @@
 
 .header {
   padding: 0.8rem;
+  width: min($maxWidthContent, 100lvw);
+  // max-width: $maxWidthContent;
+  margin: 0 auto;
 }
 
 .navItem {
