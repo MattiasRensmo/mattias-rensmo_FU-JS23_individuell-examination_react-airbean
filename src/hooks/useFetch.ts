@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function Fetch() {
+function useFetch() {
   const baseUrl = 'https://airbean-api-xjlcn.ondigitalocean.app'
 
   const [loading, setLoading] = useState(false)
@@ -104,4 +104,4 @@ function Fetch() {
   }
 }
 
-export default Fetch
+export default useFetch

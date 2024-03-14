@@ -3,14 +3,14 @@ import CartButton from '../components/CartButton'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import MenuRow from '../components/MenuRow'
-import Fetch from '../hooks/Fetch'
+import useFetch from '../hooks/useFetch'
 
 import { CoffeeMenu } from '../interfaces/CoffeeMenu'
 
 import style from './Menu.module.scss'
 
 const Menu = () => {
-  const { getMenu, loading, error } = Fetch() // Initialize the Fetch hook
+  const { getMenu, loading, error } = useFetch()
   const [menu, setMenu] = useState<any[]>([])
 
   useEffect(() => {

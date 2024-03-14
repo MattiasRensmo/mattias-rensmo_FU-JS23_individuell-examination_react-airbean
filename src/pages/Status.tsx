@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import drone from '../assets/img/drone.svg'
 import Button from '../components/Button'
-import Fetch from '../hooks/Fetch'
+import useFetch from '../hooks/useFetch'
 import useUserSessionStorage from '../hooks/useUserSessionStorage'
 import { useOrderStateStore } from '../store/useOrderStateStore'
 import style from './Status.module.scss'
@@ -13,8 +13,7 @@ const Status = () => {
     useOrderStateStore()
   const navigate = useNavigate()
 
-  // TEST
-  const { getOrderStatus, checkJWT, loading, error } = Fetch() // Initialize the Fetch hook
+  const { getOrderStatus, checkJWT, loading, error } = useFetch()
 
   useEffect(() => {
     // OM vi har JWT sparad - kolla att den fortfarande gäller - annars tar vi bort den

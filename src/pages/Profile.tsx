@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import HistoryRow from '../components/HistoryRow'
 
-import Fetch from '../hooks/Fetch'
+import useFetch from '../hooks/useFetch'
 import useUserSessionStorage from '../hooks/useUserSessionStorage'
 import { OrderHistory, OrderHistoryResponse } from '../interfaces/orderHistory'
 import style from './Profile.module.scss'
@@ -18,7 +18,8 @@ const Profile: React.FC = () => {
   const [orders, setOrders] = useState<OrderHistory[]>()
 
   const { user, updateUser, clearUser } = useUserSessionStorage()
-  const { login, signup, getOrderHistory, checkJWT, loading, error } = Fetch()
+  const { login, signup, getOrderHistory, checkJWT, loading, error } =
+    useFetch()
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -35,7 +36,7 @@ const Profile: React.FC = () => {
 
   const emailRegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
-  useEffect(() => setNameOk(name.length > 4), [name])
+  useEffect(() => setNameOk(name.length > 1), [name])
   useEffect(() => setEmailOk(emailRegExp.test(email)), [email])
   useEffect(() => setPasswordOk(password.length > 4), [password])
 
@@ -176,7 +177,6 @@ const Profile: React.FC = () => {
             </label>
             <input
               type="password"
-              // placeholder="Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
               onBlur={() => setPasswordTouched(true)}

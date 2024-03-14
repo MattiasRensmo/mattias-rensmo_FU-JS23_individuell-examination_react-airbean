@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
 import CartRow from '../components/CartRow'
-import Fetch from '../hooks/Fetch'
+import useFetch from '../hooks/useFetch'
 import useUserSessionStorage from '../hooks/useUserSessionStorage'
 import { CartItem } from '../interfaces/Cart'
 import { useCartStateStore } from '../store/useCartStateStore'
@@ -61,7 +61,7 @@ function Cart() {
   // const [loggedIn, setLoggedIn] = useState(false)
 
   const { user, updateUser, clearUser } = useUserSessionStorage()
-  const { placeOrder, checkJWT, loading, error } = Fetch()
+  const { placeOrder, checkJWT, loading, error } = useFetch()
 
   useEffect(() => {
     const token = user.jwtToken
